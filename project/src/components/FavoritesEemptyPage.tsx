@@ -1,4 +1,4 @@
-export default function favoritesEemptyPage() {
+export default function FavoritesEemptyPage() {
   return (
     <>
       <div style={{display: 'none'}}>

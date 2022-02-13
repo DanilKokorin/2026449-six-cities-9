@@ -1,4 +1,4 @@
-export default function favoritePage() {
+export default function FavoritePage() {
   return (
     <>
       <div style={{display: 'none'}}>

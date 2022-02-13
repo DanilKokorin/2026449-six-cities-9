@@ -1,4 +1,4 @@
-export default function PropertyNotLogged() {
+export default function PropertyNotLoggedPage() {
   return (
     <>
       <div style={{ display: 'none' }}>

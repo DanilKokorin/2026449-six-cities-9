@@ -1,6 +1,6 @@
 import СardHotel from './СardHotel';
 
-function MainPages() {
+export default function MainPage() {
   return (
     <>
       <div style={{ display: 'none' }}>
@@ -112,5 +112,3 @@ function MainPages() {
     </>
   );
 }
-
-export default MainPages;
