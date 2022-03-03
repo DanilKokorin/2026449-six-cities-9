@@ -1,6 +1,13 @@
 import СardHotel from '../components/СardHotel';
+import { Hotel } from '../types/hotel';
 
-export default function MainPage() {
+type MainPageProps = {
+  hotels: Hotel[];
+}
+
+export default function MainPage({ hotels }: MainPageProps) {
+  // eslint-disable-next-line no-console
+  console.log(hotels);
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -73,9 +80,9 @@ export default function MainPage() {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">{hotels.length} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
+                <span className="places__sorting-caption">Sort by&nbsp;</span>
                 <span className="places__sorting-type" tabIndex={0}>
                   Popular
                   <svg className="places__sorting-arrow" width="7" height="4">
@@ -90,11 +97,9 @@ export default function MainPage() {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <СardHotel premium img='img/apartment-01.jpg' price='120' rating={4} name='Beautiful &amp; luxurious apartment at great location' type='Apartment' />
-                <СardHotel premium={false} img='img/room.jpg' price='80' rating={4} name='Wood and stone place' type='Private room' />
-                <СardHotel premium={false} img='img/apartment-02.jpg' price='132' rating={4} name='Canal View Prinsengracht' type='Apartment' />
-                <СardHotel premium img='img/apartment-03.jpg' price='180' rating={5} name='Nice, cozy, warm big bed apartment' type='Apartment' />
-                <СardHotel premium={false} img='img/apartment-01.jpg' price='80' rating={4} name='Wood and stone place' type='Private room' />
+                {hotels.map((hotel) =>
+                  <СardHotel {...hotel} key={hotel.id} />,
+                )}
               </div>
             </section>
             <div className="cities__right-section">

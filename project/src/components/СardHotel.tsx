@@ -1,13 +1,6 @@
-interface hotels {
-  premium: boolean;
-  img: string;
-  price: string;
-  rating: number;
-  name: string;
-  type: string;
-}
+import { Hotel } from '../types/hotel';
 
-function СardHotel(props: hotels) {
+export default function СardHotel(props: Hotel) {
   function getRating(rating: number): number {
     return rating * 20;
   }
@@ -19,8 +12,8 @@ function СardHotel(props: hotels) {
           <span>Premium</span>
         </div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img className="place-card__image" src={props.img} width="260" height="200" alt="Place image" />
+        <a href="/">
+          <img className="place-card__image" src={props.img.src} width="260" height="200" alt={props.img.alt} />
         </a>
       </div>
       <div className="place-card__info">
@@ -43,12 +36,10 @@ function СardHotel(props: hotels) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{props.name}</a>
+          <a href="/">{props.name}</a>
         </h2>
         <p className="place-card__type">{props.type}</p>
       </div>
     </article>
   );
 }
-
-export default СardHotel;
