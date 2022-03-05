@@ -14,4 +14,4 @@ export type Hotel = {
 export type Favorites = {
 	city: string;
 	list: Hotel[];
-}[]
+}

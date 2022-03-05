@@ -11,12 +11,10 @@ import { Favorites, Hotel } from '../../types/hotel';
 
 type AppScreenProps = {
   hotels: Hotel[];
-  favorites: Favorites;
+  favorites: Favorites[];
 }
 
 export default function App({ hotels, favorites }: AppScreenProps) {
-  // eslint-disable-next-line no-console
-  console.log(favorites);
   return (
     <BrowserRouter>
       <Routes>
