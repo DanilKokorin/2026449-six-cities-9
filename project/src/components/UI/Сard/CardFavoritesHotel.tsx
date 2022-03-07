@@ -1,35 +1,27 @@
-interface hotels {
-  premium: boolean;
-  img: string;
-  price: string;
-  rating: number;
-  name: string;
-  type: string;
-}
+import { Hotel } from '../../../types/hotel';
 
-function СardHotel(props: hotels) {
+export default function CardFavoritesHotel({item}: { item: Hotel; }) {
   function getRating(rating: number): number {
     return rating * 20;
   }
-
   return (
-    <article className="cities__place-card place-card">
-      {props.premium &&
+    <article className="favorites__card place-card">
+      {item.premium &&
         <div className="place-card__mark">
           <span>Premium</span>
         </div>}
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img className="place-card__image" src={props.img} width="260" height="200" alt="Place image" />
+      <div className="favorites__image-wrapper place-card__image-wrapper">
+        <a href="/">
+          <img className="place-card__image" src={item.img.src} width="150" height="110" alt={item.img.alt} />
         </a>
       </div>
-      <div className="place-card__info">
+      <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{props.price}</b>
+            <b className="place-card__price-value">&euro;{item.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
+          <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -38,17 +30,15 @@ function СardHotel(props: hotels) {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${getRating(props.rating)}%` }}></span>
+            <span style={{ width: `${getRating(item.rating)}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{props.name}</a>
+          <a href="/">{item.name}</a>
         </h2>
-        <p className="place-card__type">{props.type}</p>
+        <p className="place-card__type">{item.type}</p>
       </div>
     </article>
   );
 }
-
-export default СardHotel;
