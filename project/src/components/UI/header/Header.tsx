@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
+import { AuthorizationStatus } from '../../const';
 
-const AuthorizationStatus = 'AUTH';
+const Authorization = AuthorizationStatus.Auth;
 
 export default function Header() {
   return (
@@ -14,7 +15,7 @@ export default function Header() {
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
-              {AuthorizationStatus === 'AUTH'
+              {Authorization === 'AUTH'
                 ?
                 <>
                   <li className="header__nav-item user">

@@ -1,13 +1,10 @@
+import { AuthorizationStatus } from '../components/const';
 import Header from '../components/UI/header/Header';
 import LeaveFeedback from '../components/UI/LeaveFeedback';
-import { useParams } from 'react-router-dom';
 
-const AuthorizationStatus = 'AUTH';
+const Authorization = AuthorizationStatus.Auth;
 
 export default function PropertyPage() {
-  const params = useParams();
-  // eslint-disable-next-line no-console
-  console.log(params);
   return (
     <div className="page">
       <Header />
@@ -156,11 +153,7 @@ export default function PropertyPage() {
                     </div>
                   </li>
                 </ul>
-                {AuthorizationStatus === 'AUTH'
-                  ?
-                  <LeaveFeedback />
-                  :
-                  <div></div>}
+                {Authorization === 'AUTH' && <LeaveFeedback />}
               </section>
             </div>
           </div>
