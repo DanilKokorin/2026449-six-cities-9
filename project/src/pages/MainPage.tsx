@@ -1,5 +1,7 @@
 import Header from '../components/UI/header/Header';
+import Map from '../components/UI/Map/Map';
 import СardHotel from '../components/UI/Сard/СardHotel';
+import { CITY } from '../mocks/city';
 import { Hotel } from '../types/hotel';
 
 type MainPageProps = {
@@ -55,7 +57,7 @@ export default function MainPage({ hotels }: MainPageProps) {
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{hotels.length} places to stay in Amsterdam</b>
+                <b className="places__found">{hotels.length} places to stay in {CITY.title}</b>
                 <form className="places__sorting" action="#" method="get">
                   <span className="places__sorting-caption">Sort by&nbsp;</span>
                   <span className="places__sorting-type" tabIndex={0}>
@@ -78,7 +80,7 @@ export default function MainPage({ hotels }: MainPageProps) {
                 </div>
               </section>
               <div className="cities__right-section">
-                <section className="cities__map map"></section>
+                <Map city={CITY} hotels={hotels} />
               </div>
             </div>
             :

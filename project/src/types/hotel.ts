@@ -9,6 +9,8 @@ export type Hotel = {
 	rating: number;
 	name: string;
 	type: string;
+	lat: number,
+  lng: number;
 }
 
 export type Favorites = {
