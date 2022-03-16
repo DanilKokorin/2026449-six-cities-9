@@ -13,6 +13,11 @@ export type Hotel = {
   lng: number;
 }
 
+export type Offers = {
+	city: string;
+	offers: Hotel[];
+}
+
 export type Favorites = {
 	city: string;
 	list: Hotel[];

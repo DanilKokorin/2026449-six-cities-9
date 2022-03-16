@@ -1,14 +1,28 @@
+import { useEffect, useState } from 'react';
 import Header from '../components/UI/header/Header';
 import Map from '../components/UI/Map/Map';
+import TabList from '../components/UI/tab-list/TabList';
 import СardHotel from '../components/UI/Сard/СardHotel';
 import { CITY } from '../mocks/city';
-import { Hotel } from '../types/hotel';
+import { offers } from '../mocks/offers';
+import { Offers } from '../types/hotel';
 
-type MainPageProps = {
-  hotels: Hotel[];
-}
 
-export default function MainPage({ hotels }: MainPageProps) {
+export default function MainPage() {
+  //тут я объявляю состояние города, который показывает предложения 
+  const [city, setCity] = useState<string>('Amsterdam');
+  //это callback функция, которая получает город при нажатии из дочернего компонента TabList, он там снизу
+  //получает данные успешно, приходит город тот который нужен
+  const getFilteredCity = (filteredCity: string) => {
+    setCity(filteredCity);
+  };
+  // по логике, которая вроде как работает, при изменении переменной
+  // city должны обновляться предложения по аренде и город в заголовке 
+  // но в чём проблема, я не знаю как передать это в состояние 
+  // 
+  useEffect(() => {
+    const b = [...offers].filter((offer) => offer.city === city);
+  }, [city]);
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -17,47 +31,16 @@ export default function MainPage({ hotels }: MainPageProps) {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="/">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="/">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="/">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active" href="/">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="/">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="/">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
+            <TabList getFilteredCity={getFilteredCity}/>
           </section>
         </div>
         <div className="cities">
-          {hotels.length
+          {/* {list.offers.length
             ?
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{hotels.length} places to stay in {CITY.title}</b>
+                <b className="places__found">{list.offers.length} places to stay in {list.city}</b>
                 <form className="places__sorting" action="#" method="get">
                   <span className="places__sorting-caption">Sort by&nbsp;</span>
                   <span className="places__sorting-type" tabIndex={0}>
@@ -74,13 +57,13 @@ export default function MainPage({ hotels }: MainPageProps) {
                   </ul>
                 </form>
                 <div className="cities__places-list places__list tabs__content">
-                  {hotels.map((hotel) =>
+                  {list.offers.map((hotel) =>
                     <СardHotel {...hotel} key={hotel.id} />,
                   )}
                 </div>
               </section>
               <div className="cities__right-section">
-                <Map city={CITY} hotels={hotels} />
+                <Map city={CITY} hotels={list.offers} />
               </div>
             </div>
             :
@@ -92,9 +75,13 @@ export default function MainPage({ hotels }: MainPageProps) {
                 </div>
               </section>
               <div className="cities__right-section"></div>
-            </div>}
+            </div>} */}
         </div>
       </main>
     </div>
   );
 }
+function filterOffersByCity() {
+  throw new Error('Function not implemented.');
+}
+
