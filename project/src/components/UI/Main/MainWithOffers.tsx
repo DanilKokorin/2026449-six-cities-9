@@ -4,12 +4,12 @@ import Map from '../Map/Map';
 import CardHotel from '../Сard/СardHotel';
 import { cities } from './../../../mocks/cities';
 
-type MainWithOffers = {
+type MainWithOffersProps = {
   suggestions: Hotel[];
   city: string;
 };
 
-export default function MainWithOffers({suggestions, city}: MainWithOffers) {
+export default function MainWithOffers({suggestions, city}: MainWithOffersProps) {
 
   const items = cities.filter((item) => item.title === city);
   let location: City = {
