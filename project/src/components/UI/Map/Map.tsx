@@ -21,6 +21,7 @@ export default function Map({ hotels, city }: MapProps) {
     iconAnchor: [20, 40],
   });
 
+
   useEffect(() => {
     if (map) {
       hotels.forEach((hotel) => {
