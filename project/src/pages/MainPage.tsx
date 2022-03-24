@@ -10,7 +10,7 @@ export default function MainPage() {
   const { city } = useAppSelector((state) => state);
   const items = offers.filter((offer) => offer.city === city);
   let suggestions: Hotel[] = [];
-  items.map((item) => {
+  items.forEach((item) => {
     suggestions = item.offers;
   });
 

@@ -10,17 +10,7 @@ type MainWithOffersProps = {
 };
 
 export default function MainWithOffers({suggestions, city}: MainWithOffersProps) {
-
-  const items = cities.filter((item) => item.title === city);
-  let location: City = {
-    title: '',
-    lat: 0,
-    lng: 0,
-    zoom: 0,
-  };
-  items.map((item) => {
-    location = item;
-  });
+  const location: City = cities.filter((item) => item.title === city)[0];
 
   return (
     <div className="cities__places-container container">
