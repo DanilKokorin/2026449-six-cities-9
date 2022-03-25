@@ -2,7 +2,6 @@ import { Hotel } from '../../../types/hotel';
 import { City } from '../../../types/typeMap';
 import Map from '../Map/Map';
 import CardHotel from '../Сard/СardHotel';
-import { cities } from './../../../mocks/cities';
 
 type MainWithOffersProps = {
   hotels: Hotel[];
@@ -10,7 +9,8 @@ type MainWithOffersProps = {
 };
 
 export default function MainWithOffers({ hotels, city }: MainWithOffersProps) {
-  const location: City = cities.filter((item) => item.title === city)[0];
+  const offer = hotels.filter((hotel) => hotel.city.name === city)[0];
+  const location: City = offer.city.location;
 
   return (
     <div className="cities__places-container container">
