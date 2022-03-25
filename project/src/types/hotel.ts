@@ -1,24 +1,36 @@
 export type Hotel = {
-	id: number;
-	premium: boolean;
-	img: {
-		src: string;
-		alt: string;
-	};
-	price: string;
-	rating: number;
-	name: string;
-	type: string;
-	lat: number,
-  lng: number;
+	id: number,
+  bedrooms: number,
+  city: City,
+  description: string,
+  goods: string[],
+  host: Host,
+  images: string[],
+  isFavorite: boolean,
+  isPremium: boolean,
+  location: Location,
+  maxAdults: number,
+  previewImage: string,
+  price: number,
+  rating: number,
+  title: string,
+  type: string
+};
+
+export type Location = {
+  latitude: number,
+  longitude: number,
+  zoom: number,
 }
 
-export type Offers = {
-	city: string;
-	offers: Hotel[];
+export type City = {
+  location: Location,
+  name: string,
 }
 
-export type Favorites = {
-	city: string;
-	list: Hotel[];
+export type Host = {
+  avatarUrl: string,
+  id: number,
+  isPro: boolean,
+  name: string,
 }

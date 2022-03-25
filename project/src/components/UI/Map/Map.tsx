@@ -1,10 +1,11 @@
 import { useRef, useEffect } from 'react';
 import useMap from '../../../hooks/useMap';
 import { Hotel } from '../../../types/hotel';
-import { City } from '../../../types/typeMap';
+// import { Location } from '../../../types/hotel';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { URL_MARKER_DEFAULT } from './../../marker';
+import { URL_MARKER_DEFAULT } from '../../../marker';
+import { City } from '../../../types/typeMap';
 
 type MapProps = {
   hotels: Hotel[];
@@ -27,8 +28,8 @@ export default function Map({ hotels, city }: MapProps) {
       hotels.forEach((hotel) => {
         leaflet
           .marker({
-            lat: hotel.lat,
-            lng: hotel.lng,
+            lat: hotel.location.latitude,
+            lng: hotel.location.longitude,
           }, {
             icon: defaultCustomIcon,
           })

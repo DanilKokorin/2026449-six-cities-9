@@ -6,14 +6,18 @@ import PageNotFound from '../../pages/PageNotFound';
 import PropertyPage from '../../pages/PropertyPage';
 import Layout from '../../route/layout';
 import PrivateRoute from '../../route/private-route';
-import { AppRoute, AuthorizationStatus } from '../const';
-import { Favorites } from '../../types/hotel';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import Loader from './../UI/Loader/Loader';
+import { useAppSelector } from '../../hooks/useState';
 
-type AppScreenProps = {
-  favorites: Favorites[];
-}
+export default function App() {
+  const { isLoader } = useAppSelector((state) => state);
+  if (isLoader) {
+    return (
+      <Loader />
+    );
+  }
 
-export default function App({ favorites }: AppScreenProps) {
   return (
     <BrowserRouter>
       <Routes>
@@ -25,7 +29,7 @@ export default function App({ favorites }: AppScreenProps) {
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.Auth}
             >
-              <FavoritePage favorites={favorites}/>
+              <FavoritePage />
             </PrivateRoute>
           }
           />
