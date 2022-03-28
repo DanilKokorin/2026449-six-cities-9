@@ -11,8 +11,8 @@ import Loader from './../UI/Loader/Loader';
 import { useAppSelector } from '../../hooks/useState';
 
 export default function App() {
-  const { isLoader } = useAppSelector((state) => state);
-  if (isLoader) {
+  const { isLodaing } = useAppSelector((state) => state);
+  if (isLodaing) {
     return (
       <Loader />
     );

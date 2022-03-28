@@ -6,7 +6,7 @@ import { AppState } from '../types/state';
 const initialState: AppState = {
   locations: [],
   city: DEFAULT_CITY,
-  isLoader: true,
+  isLodaing: true,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -16,7 +16,7 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(getLocations, (state, action) => {
       state.locations = action.payload;
-      state.isLoader = false;
+      state.isLodaing = false;
     });
 });
 

@@ -8,5 +8,5 @@ export type AppDispatch = typeof store.dispatch;
 export type AppState = {
   city: string,
   locations: Hotel[],
-  isLoader: boolean,
+  isLodaing: boolean,
 }
