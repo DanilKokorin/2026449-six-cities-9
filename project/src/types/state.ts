@@ -1,3 +1,4 @@
+import { AuthorizationStatus } from '../const.js';
 import { store } from '../store/index.js';
 import { Hotel } from './hotel.js';
 
@@ -9,4 +10,7 @@ export type AppState = {
   city: string,
   locations: Hotel[],
   isLodaing: boolean,
+  authorizationStatus: AuthorizationStatus,
+  error: string,
+  user: string,
 }

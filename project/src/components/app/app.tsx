@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import FavoritePage from '../../pages/FavoritePage';
 import Login from '../../pages/Login';
 import MainPage from '../../pages/MainPage';
@@ -9,17 +9,22 @@ import PrivateRoute from '../../route/private-route';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import Loader from './../UI/Loader/Loader';
 import { useAppSelector } from '../../hooks/useState';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from './../../browser-history';
+
+export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
+  authorizationStatus === AuthorizationStatus.Unknown;
 
 export default function App() {
-  const { isLodaing } = useAppSelector((state) => state);
-  if (isLodaing) {
+  const { authorizationStatus, isLodaing } = useAppSelector((state) => state);
+  if (isCheckedAuth(authorizationStatus) || isLodaing) {
     return (
       <Loader />
     );
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path={AppRoute.MainPage} element={<Layout />}>
           <Route index element={<MainPage />} />
@@ -27,7 +32,7 @@ export default function App() {
           <Route path={AppRoute.Room} element={<PropertyPage />} />
           <Route path={AppRoute.Favorites} element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.Auth}
+              authorizationStatus={authorizationStatus}
             >
               <FavoritePage />
             </PrivateRoute>
@@ -36,6 +41,6 @@ export default function App() {
           <Route path="*" element={<PageNotFound />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
