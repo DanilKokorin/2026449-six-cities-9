@@ -2,21 +2,21 @@ import { Hotel } from '../../../types/hotel';
 import { City } from '../../../types/typeMap';
 import Map from '../Map/Map';
 import CardHotel from '../Сard/СardHotel';
-import { cities } from './../../../mocks/cities';
 
 type MainWithOffersProps = {
-  suggestions: Hotel[];
+  hotels: Hotel[];
   city: string;
 };
 
-export default function MainWithOffers({suggestions, city}: MainWithOffersProps) {
-  const location: City = cities.filter((item) => item.title === city)[0];
+export default function MainWithOffers({ hotels, city }: MainWithOffersProps) {
+  const offer = hotels.filter((hotel) => hotel.city.name === city)[0];
+  const location: City = offer.city.location;
 
   return (
     <div className="cities__places-container container">
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
-        <b className="places__found">{suggestions.length} places to stay in {city}</b>
+        <b className="places__found">{hotels.length} places to stay in {city}</b>
         <form className="places__sorting" action="#" method="get">
           <span className="places__sorting-caption">Sort by&nbsp;</span>
           <span className="places__sorting-type" tabIndex={0}>
@@ -33,13 +33,13 @@ export default function MainWithOffers({suggestions, city}: MainWithOffersProps)
           </ul>
         </form>
         <div className="cities__places-list places__list tabs__content">
-          {suggestions.map((suggestion) =>
-            <CardHotel {...suggestion} key={suggestion.id} />,
+          {hotels.map((hotel) =>
+            <CardHotel {...hotel} key={hotel.id} />,
           )}
         </div>
       </section>
       <div className="cities__right-section">
-        <Map city={location} hotels={suggestions} />
+        <Map city={location} hotels={hotels} />
       </div>
     </div>
   );

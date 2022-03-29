@@ -1,10 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { setCity, getLocations } from './action';
-import { DEFAULT_CITY } from './../components/const';
+import { DEFAULT_CITY } from '../const';
+import { AppState } from '../types/state';
 
-const initialState = {
+const initialState: AppState = {
   locations: [],
   city: DEFAULT_CITY,
+  isLodaing: true,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -14,6 +16,7 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(getLocations, (state, action) => {
       state.locations = action.payload;
+      state.isLodaing = false;
     });
 });
 

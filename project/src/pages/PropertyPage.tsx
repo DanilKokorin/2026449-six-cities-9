@@ -1,4 +1,4 @@
-import { AuthorizationStatus } from '../components/const';
+import { AuthorizationStatus } from '../const';
 import Header from '../components/UI/header/Header';
 import LeaveFeedback from '../components/UI/LeaveFeedback';
 

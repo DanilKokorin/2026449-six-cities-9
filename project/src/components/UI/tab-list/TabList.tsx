@@ -1,5 +1,5 @@
-import { cities } from '../../../mocks/cities';
 import { Link } from 'react-router-dom';
+import { mainСities } from '../../../const';
 import { useAppSelector } from '../../../hooks/useState';
 import { useAppDispatch } from './../../../hooks/useState';
 import { setCity } from './../../../store/action';
@@ -17,15 +17,15 @@ export default function TabList() {
 
   return (
     <ul className="locations__list tabs__list">
-      {cities.map((location) => {
-        const isActive = `locations__item-link tabs__item ${location.title === city && ' tabs__item--active'}`;
+      {mainСities.map((location) => {
+        const isActive = `locations__item-link tabs__item ${location === city && ' tabs__item--active'}`;
         return (
-          <li className="locations__item" key={location.lat}>
+          <li className="locations__item" key={location}>
             <Link to='/'
               className={isActive}
-              onClick={getСity(location.title)}
+              onClick={getСity(location)}
             >
-              <span>{location.title}</span>
+              <span>{location}</span>
             </Link>
           </li>
         );

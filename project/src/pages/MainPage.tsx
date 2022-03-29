@@ -2,17 +2,12 @@ import Header from '../components/UI/header/Header';
 import MainWithOffers from '../components/UI/Main/MainWithOffers';
 import TabList from '../components/UI/tab-list/TabList';
 import { useAppSelector } from '../hooks/useState';
-import { offers } from '../mocks/offers';
 import { Hotel } from '../types/hotel';
 import MainPageEmpty from './../components/UI/Main/MainPageEmpty';
 
 export default function MainPage() {
-  const { city } = useAppSelector((state) => state);
-  const items = offers.filter((offer) => offer.city === city);
-  let suggestions: Hotel[] = [];
-  items.forEach((item) => {
-    suggestions = item.offers;
-  });
+  const { city, locations } = useAppSelector((state) => state);
+  const hotels: Hotel[] = locations.filter((location) => location.city.name === city);
 
   return (
     <div className="page page--gray page--main">
@@ -26,9 +21,9 @@ export default function MainPage() {
           </section>
         </div>
         <div className="cities">
-          {offers.length
+          {hotels.length
             ?
-            <MainWithOffers suggestions={suggestions} city={city} />
+            <MainWithOffers hotels={hotels} city={city} />
             :
             <MainPageEmpty />}
         </div>

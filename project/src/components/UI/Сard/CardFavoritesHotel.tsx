@@ -6,13 +6,13 @@ export default function CardFavoritesHotel({item}: { item: Hotel; }) {
   }
   return (
     <article className="favorites__card place-card">
-      {item.premium &&
+      {/* {item.premium &&
         <div className="place-card__mark">
           <span>Premium</span>
-        </div>}
+        </div>} */}
       <div className="favorites__image-wrapper place-card__image-wrapper">
         <a href="/">
-          <img className="place-card__image" src={item.img.src} width="150" height="110" alt={item.img.alt} />
+          {/* <img className="place-card__image" src={item.img.src} width="150" height="110" alt={item.img.alt} /> */}
         </a>
       </div>
       <div className="favorites__card-info place-card__info">
@@ -35,7 +35,7 @@ export default function CardFavoritesHotel({item}: { item: Hotel; }) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="/">{item.name}</a>
+          {/* <a href="/">{item.name}</a> */}
         </h2>
         <p className="place-card__type">{item.type}</p>
       </div>

@@ -8,13 +8,13 @@ export default function СardHotel(props: Hotel) {
 
   return (
     <article className="cities__place-card place-card">
-      {props.premium &&
+      {props.isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
         </div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${props.id}`} >
-          <img className="place-card__image" src={props.img.src} width="260" height="200" alt={props.img.alt} />
+          <img className="place-card__image" src={props.previewImage} width="260" height="200" alt={props.host.name} />
         </Link>
       </div>
       <div className="place-card__info">
@@ -37,7 +37,7 @@ export default function СardHotel(props: Hotel) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${props.id}`} >{props.name}</Link>
+          <Link to={`/offer/${props.id}`} >{props.title}</Link>
         </h2>
         <p className="place-card__type">{props.type}</p>
       </div>
