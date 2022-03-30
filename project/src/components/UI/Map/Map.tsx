@@ -1,7 +1,6 @@
 import { useRef, useEffect } from 'react';
 import useMap from '../../../hooks/useMap';
 import { Hotel } from '../../../types/hotel';
-// import { Location } from '../../../types/hotel';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { URL_MARKER_DEFAULT } from '../../../marker';
@@ -10,9 +9,10 @@ import { City } from '../../../types/typeMap';
 type MapProps = {
   hotels: Hotel[];
   city: City;
+  className: string;
 };
 
-export default function Map({ hotels, city }: MapProps) {
+export default function Map({ hotels, city, className }: MapProps) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -24,6 +24,8 @@ export default function Map({ hotels, city }: MapProps) {
 
 
   useEffect(() => {
+    const markers = leaflet.layerGroup();
+
     if (map) {
       hotels.forEach((hotel) => {
         leaflet
@@ -35,7 +37,13 @@ export default function Map({ hotels, city }: MapProps) {
           })
           .addTo(map);
       });
+
+      map.flyTo([city.latitude, city.longitude], city.zoom);
     }
-  }, [map]);
-  return <section className="cities__map map" ref={mapRef}></section>;
+
+    return () => {
+      markers.clearLayers();
+    };
+  }, [city.latitude, city.longitude, city.zoom, defaultCustomIcon, hotels, map]);
+  return <section className={className} ref={mapRef}></section>;
 }

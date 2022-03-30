@@ -1,15 +1,27 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { setCity, getLocations, requireAuthorization, setError, setUser } from './action';
+import {
+  setCity,
+  getHotels,
+  requireAuthorization,
+  setError,
+  setUser,
+  getHotel,
+  getComments,
+  getNearby } from './action';
 import { AuthorizationStatus, DEFAULT_CITY } from '../const';
 import { AppState } from '../types/state';
 
 const initialState: AppState = {
-  locations: [],
+  hotels: [],
   city: DEFAULT_CITY,
   isLodaing: true,
   authorizationStatus: AuthorizationStatus.Unknown,
   error: '',
   user: '',
+  hotel: [][0],
+  comments: [],
+  nearby: [],
+  isHotelLodaing: true,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -17,8 +29,8 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setCity, (state, action) => {
       state.city = action.payload;
     })
-    .addCase(getLocations, (state, action) => {
-      state.locations = action.payload;
+    .addCase(getHotels, (state, action) => {
+      state.hotels = action.payload;
       state.isLodaing = false;
     }).addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
@@ -26,6 +38,13 @@ const reducer = createReducer(initialState, (builder) => {
       state.error = action.payload;
     }).addCase(setUser, (state, action) => {
       state.user = action.payload;
+    }).addCase(getHotel, (state, action) => {
+      state.hotel = action.payload;
+      state.isHotelLodaing = false;
+    }).addCase(getComments, (state, action) => {
+      state.comments = action.payload;
+    }).addCase(getNearby, (state, action) => {
+      state.nearby = action.payload;
     });
 });
 
