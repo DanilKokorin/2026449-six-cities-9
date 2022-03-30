@@ -18,13 +18,6 @@ export default function PropertyPage() {
   const dispatch = useAppDispatch();
   const { hotel, comments, nearby, isHotelLodaing } = useAppSelector((state) => state);
 
-  // eslint-disable-next-line no-console
-  console.log(hotel);
-  // eslint-disable-next-line no-console
-  console.log(comments);
-  // eslint-disable-next-line no-console
-  console.log(nearby);
-
   function getRating(rating: number): number {
     return rating * 20;
   }
