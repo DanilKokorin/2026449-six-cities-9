@@ -28,6 +28,10 @@ export default function PropertyPage() {
     dispatch(fetchNearbyAction(param));
   }, [dispatch, param]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [param]);
+
   if (isHotelLodaing) {
     return (
       <Loader />
