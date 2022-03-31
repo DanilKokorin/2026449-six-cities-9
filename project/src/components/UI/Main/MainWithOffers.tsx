@@ -39,7 +39,7 @@ export default function MainWithOffers({ hotels, city }: MainWithOffersProps) {
         </div>
       </section>
       <div className="cities__right-section">
-        <Map city={location} hotels={hotels} />
+        <Map city={location} hotels={hotels} className="cities__map map" />
       </div>
     </div>
   );

@@ -6,8 +6,8 @@ import { Hotel } from '../types/hotel';
 import MainPageEmpty from './../components/UI/Main/MainPageEmpty';
 
 export default function MainPage() {
-  const { city, locations } = useAppSelector((state) => state);
-  const hotels: Hotel[] = locations.filter((location) => location.city.name === city);
+  const { city, hotels } = useAppSelector((state) => state);
+  const offers: Hotel[] = hotels.filter((hotel) => hotel.city.name === city);
 
   return (
     <div className="page page--gray page--main">
@@ -21,9 +21,9 @@ export default function MainPage() {
           </section>
         </div>
         <div className="cities">
-          {hotels.length
+          {offers.length
             ?
-            <MainWithOffers hotels={hotels} city={city} />
+            <MainWithOffers hotels={offers} city={city} />
             :
             <MainPageEmpty />}
         </div>

@@ -1,12 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from '../store';
 import { store } from '../store';
-import { getLocations, requireAuthorization, setError } from './action';
+import { getHotel, getHotels, requireAuthorization, setError, getComments, getNearby } from './action';
 import { APIRoute, AuthorizationStatus } from '../const';
 import { Hotel } from '../types/hotel';
 import { saveToken, dropToken } from './../services/token';
 import { AuthData } from '../types/AuthData';
 import { UserData } from '../types/UserData';
+import { Сomment } from '../types/comment';
 import { TIMEOUT_SHOW_ERROR } from './../const';
 import { errorHandle } from './../services/error-handle';
 
@@ -21,12 +22,48 @@ export const clearErrorAction = createAsyncThunk(
 );
 
 
-export const fetchLocationsAction = createAsyncThunk(
-  'data/fetchLocations',
+export const fetchHotelsAction = createAsyncThunk(
+  'data/fetchHotels',
   async () => {
     try {
       const { data } = await api.get<Hotel[]>(APIRoute.Hotels);
-      store.dispatch(getLocations(data));
+      store.dispatch(getHotels(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchHotelAction = createAsyncThunk(
+  'data/fetchHotel',
+  async (id: string | undefined) => {
+    try {
+      const { data } = await api.get<Hotel>(`${APIRoute.Hotels}/${id}`);
+      store.dispatch(getHotel(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchCommentsAction = createAsyncThunk(
+  'data/fetchHotel',
+  async (id: string | undefined) => {
+    try {
+      const { data } = await api.get<Сomment[]>(`${APIRoute.Comments}/${id}`);
+      store.dispatch(getComments(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchNearbyAction = createAsyncThunk(
+  'data/fetchHotel',
+  async (id: string | undefined) => {
+    try {
+      const { data } = await api.get<Hotel[]>(`${APIRoute.Hotels}/${id}${APIRoute.Nearby}`);
+      store.dispatch(getNearby(data));
     } catch (error) {
       errorHandle(error);
     }
