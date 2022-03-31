@@ -9,7 +9,14 @@ export default function Review({ review }: ReviewProps) {
     return rating * 20;
   }
 
-  const month = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  function getMonthDate(date: string): string {
+    const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return month[new Date(date).getMonth()];
+  }
+
+  function getFullYearDate(date: string): number {
+    return new Date(date).getFullYear();
+  }
 
   return (
     <li className="reviews__item">
@@ -31,7 +38,12 @@ export default function Review({ review }: ReviewProps) {
         <p className="reviews__text">
           {review.comment}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">{month[new Date(review.date).getMonth()]} {new Date(review.date).getFullYear()}</time>
+        <time
+          className="reviews__time"
+          dateTime="2019-04-24"
+        >
+          {getMonthDate(review.date)} {getFullYearDate(review.date)}
+        </time>
       </div>
     </li>
   );

@@ -23,17 +23,17 @@ export enum AppRoute {
 }
 
 export enum AuthorizationStatus {
-    Auth = 'AUTH',
-    NoAuth = 'NO_AUTH',
-    Unknown = 'UNKNOWN',
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
 }
 
 export enum APIRoute {
-    Hotels = '/hotels',
-    Login = '/login',
-    Logout = '/logout',
-    Nearby = '/nearby',
-    Comments = '/comments',
+  Hotels = '/hotels',
+  Login = '/login',
+  Logout = '/logout',
+  Nearby = '/nearby',
+  Comments = '/comments',
 }
 
 
@@ -44,3 +44,4 @@ export enum HTTP_CODE {
 }
 
 export const errorStatuses = [HTTP_CODE.BAD_REQUEST, HTTP_CODE.UNAUTHORIZED, HTTP_CODE.NOT_FOUND];
+
