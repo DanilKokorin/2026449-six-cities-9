@@ -12,6 +12,8 @@ export const DEFAULT_CITY = 'Paris';
 
 export const mainСities = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
+export const bySorted = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
+
 export const TIMEOUT_SHOW_ERROR = 3000;
 
 

@@ -1,23 +1,23 @@
 import { AuthorizationStatus } from '../const';
 import Header from '../components/UI/header/Header';
-import LeaveFeedback from '../components/UI/LeaveFeedback';
+import LeaveFeedback from '../components/UI/feedback-form/LeaveFeedback';
 import { useParams } from 'react-router-dom';
 import Map from '../components/UI/Map/Map';
 import CardHotel from './../components/UI/Сard/СardHotel';
 import Review from '../components/UI/Reviews/Review';
 import { useAppSelector } from '../hooks/useState';
 import { useAppDispatch } from './../hooks/useState';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchHotelAction, fetchCommentsAction, fetchNearbyAction } from './../store/api-action';
 import Loader from '../components/UI/Loader/Loader';
 
 const Authorization = AuthorizationStatus.Auth;
 
 export default function PropertyPage() {
+  const { hotel, comments, nearby, isHotelLodaing } = useAppSelector((state) => state);
+  const [chosenHotel, setChosenHotel] = useState(nearby[0]);
   const param = useParams().id || '';
   const dispatch = useAppDispatch();
-  const { hotel, comments, nearby, isHotelLodaing } = useAppSelector((state) => state);
-
   function getRating(rating: number): number {
     return rating * 20;
   }
@@ -27,6 +27,10 @@ export default function PropertyPage() {
     dispatch(fetchCommentsAction(param));
     dispatch(fetchNearbyAction(param));
   }, [dispatch, param]);
+
+  useEffect(() => {
+    setChosenHotel(nearby[0]);
+  }, [nearby]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -140,13 +144,15 @@ export default function PropertyPage() {
               </section>
             </div>
           </div>
-          <Map city={hotel.city.location} hotels={nearby} className="property__map map" />
+          {chosenHotel
+            ? <Map selectedPoint={chosenHotel} city={hotel.city.location} hotels={nearby} className="property__map map" />
+            : <section className="property__map map"></section>}
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              {nearby.map((item) => <CardHotel {...item} key={item.id} />)}
+              {nearby.map((item) => <CardHotel setChosenHotel={setChosenHotel} sortedHotel={item} key={item.id} />)}
             </div>
           </section>
         </div>

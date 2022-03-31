@@ -8,7 +8,7 @@ import Layout from '../../route/layout';
 import PrivateRoute from '../../route/private-route';
 import { AppRoute } from '../../const';
 import Loader from './../UI/Loader/Loader';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../../route/history-route';
 import browserHistory from './../../browser-history';
 import { useAppLoading } from '../../hooks/useAppLoading';
 
