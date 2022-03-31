@@ -1,11 +1,11 @@
 import { useRef, FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AppRoute } from '../const';
+import { AppRoute, mainСities } from '../const';
 import { useAppDispatch } from '../hooks/useState';
 import { loginAction } from '../store/api-action';
 import { AuthData } from '../types/AuthData';
 import Header from './../components/UI/header/Header';
-import { setUser } from './../store/action';
+import { setCity, setUser } from './../store/action';
 
 export default function Login(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -67,7 +67,11 @@ export default function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link to='/' className="locations__item-link">
+              <Link
+                to='/'
+                className="locations__item-link"
+                onClick={() => dispatch(setCity(mainСities[3]))}
+              >
                 <span>Amsterdam</span>
               </Link>
             </div>
