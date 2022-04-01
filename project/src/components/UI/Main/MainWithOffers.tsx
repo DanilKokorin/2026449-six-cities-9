@@ -20,32 +20,30 @@ export default function MainWithOffers({ hotels, city }: MainWithOffersProps) {
     setSortedHotels(hotels);
   }, [hotels]);
 
-  const sortConfig = {
-    'Price: low to high': () => {
-      setSortedHotels([...hotels].sort((a, b) =>
-        a.price - b.price,
-      ));
-    },
-    'Price: high to low': () => {
-      setSortedHotels([...hotels].sort((a, b) =>
-        a.price - b.price,
-      ).reverse());
-    },
-    'Top rated first': () => {
-      setSortedHotels([...hotels].sort((a, b) =>
-        a.rating - b.rating,
-      ).reverse());
-    },
-    'Popular': () => {
-      setSortedHotels(hotels);
-    },
-  };
-  function sortedPost(sort: string): string {
-    return sort;
+  function sortedPost(sort: string) {
+    switch (sort) {
+      case 'Price: low to high':
+        setSortedHotels([...hotels].sort((a, b) =>
+          a.price - b.price,
+        ));
+        break;
+
+      case 'Price: high to low':
+        setSortedHotels([...hotels].sort((a, b) =>
+          a.price - b.price,
+        ).reverse());
+        break;
+
+      case 'Top rated first':
+        setSortedHotels([...hotels].sort((a, b) =>
+          a.rating - b.rating,
+        ).reverse());
+        break;
+
+      case 'Popular':
+        return setSortedHotels(hotels);
+    }
   }
-  sortedPost()
-  // eslint-disable-next-line no-console
-  console.log(sortConfig[]);
 
   return (
     <div className="cities__places-container container">
