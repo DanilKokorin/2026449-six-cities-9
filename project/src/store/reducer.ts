@@ -7,7 +7,8 @@ import {
   setUser,
   getHotel,
   getComments,
-  getNearby } from './action';
+  getNearby,
+  setRating} from './action';
 import { AuthorizationStatus, DEFAULT_CITY } from '../const';
 import { AppState } from '../types/state';
 
@@ -22,14 +23,14 @@ const initialState: AppState = {
   comments: [],
   nearby: [],
   isHotelLodaing: true,
+  rating: 0,
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setCity, (state, action) => {
       state.city = action.payload;
-    })
-    .addCase(getHotels, (state, action) => {
+    }).addCase(getHotels, (state, action) => {
       state.hotels = action.payload;
       state.isLodaing = false;
     }).addCase(requireAuthorization, (state, action) => {
@@ -38,6 +39,8 @@ const reducer = createReducer(initialState, (builder) => {
       state.error = action.payload;
     }).addCase(setUser, (state, action) => {
       state.user = action.payload;
+    }).addCase(setRating, (state, action) => {
+      state.rating = action.payload;
     }).addCase(getHotel, (state, action) => {
       state.hotel = action.payload;
       state.isHotelLodaing = false;

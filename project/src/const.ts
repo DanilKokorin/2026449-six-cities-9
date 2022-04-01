@@ -7,6 +7,7 @@ export const SET_USER = 'SET_USER';
 export const REDIRECT_TO_ROUTE = 'REDIRECT_TO_ROUTE';
 export const GET_COMMENTS = 'GET_COMMENTS';
 export const GET_NEARBY = 'GET_NEARBY';
+export const SET_RATING = 'SET_RATING';
 
 export const DEFAULT_CITY = 'Paris';
 
@@ -16,6 +17,7 @@ export const sortedBy = ['Popular', 'Price: low to high', 'Price: high to low', 
 
 export const TIMEOUT_SHOW_ERROR = 3000;
 
+export const STARS_NUMBER = 5;
 
 export enum AppRoute {
   MainPage = '/',

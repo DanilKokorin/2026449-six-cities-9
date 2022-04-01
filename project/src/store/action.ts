@@ -8,7 +8,8 @@ import {
   AppRoute,
   GET_HOTEL,
   GET_COMMENTS,
-  GET_NEARBY} from '../const';
+  GET_NEARBY,
+  SET_RATING} from '../const';
 import { Hotel } from '../types/hotel';
 import { Сomment } from '../types/comment';
 import { AuthorizationStatus } from '../const';
@@ -27,6 +28,8 @@ export const getNearby = createAction<Hotel[]>(GET_NEARBY);
 export const requireAuthorization = createAction<AuthorizationStatus>(REQUIRE_AUTHORIZATION);
 
 export const setError = createAction<string>(SET_ERROR);
+
+export const setRating = createAction<number>(SET_RATING);
 
 export const setUser = createAction<string>(SET_USER);
 

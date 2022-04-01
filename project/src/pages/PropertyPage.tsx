@@ -10,11 +10,12 @@ import { useAppDispatch } from './../hooks/useState';
 import { useEffect, useState } from 'react';
 import { fetchHotelAction, fetchCommentsAction, fetchNearbyAction } from './../store/api-action';
 import Loader from '../components/UI/Loader/Loader';
+import PageNotFound from './PageNotFound';
 
-const Authorization = AuthorizationStatus.Auth;
 
 export default function PropertyPage() {
-  const { hotel, comments, nearby, isHotelLodaing } = useAppSelector((state) => state);
+  const { hotel, comments, nearby, isHotelLodaing, authorizationStatus } = useAppSelector((state) => state);
+  const isAuthorization = authorizationStatus === AuthorizationStatus.Auth;
   const [chosenHotel, setChosenHotel] = useState(nearby[0]);
   const param = useParams().id || '';
   const dispatch = useAppDispatch();
@@ -40,6 +41,10 @@ export default function PropertyPage() {
     return (
       <Loader />
     );
+  }
+
+  if (!hotel) {
+    return <PageNotFound />;
   }
 
   return (
@@ -140,7 +145,7 @@ export default function PropertyPage() {
                     <Review review={comment} key={comment.id} />
                   ))}
                 </ul>
-                {Authorization === 'AUTH' && <LeaveFeedback />}
+                {isAuthorization && <LeaveFeedback hotelID={+param} />}
               </section>
             </div>
           </div>
