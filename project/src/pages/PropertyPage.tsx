@@ -145,7 +145,7 @@ export default function PropertyPage() {
                     <Review review={comment} key={comment.id} />
                   ))}
                 </ul>
-                {isAuthorization && <LeaveFeedback hotelID={+param} />}
+                {isAuthorization && <LeaveFeedback hotelID={Number(param)} />}
               </section>
             </div>
           </div>
