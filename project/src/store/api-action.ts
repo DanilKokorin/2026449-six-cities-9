@@ -10,6 +10,7 @@ import { UserData } from '../types/UserData';
 import { Сomment } from '../types/comment';
 import { TIMEOUT_SHOW_ERROR } from './../const';
 import { errorHandle } from './../services/error-handle';
+import { AddReview } from '../types/addReview';
 
 export const clearErrorAction = createAsyncThunk(
   'main/clearError',
@@ -111,3 +112,15 @@ export const logoutAction = createAsyncThunk(
   },
 );
 
+export const LeaveFeedbackAction = createAsyncThunk(
+  'offer/leaveFeedback',
+  async ({hotelID, reviewData}: AddReview) => {
+    try {
+      const {comment, rating} = reviewData;
+      const {data} = await api.post(`${APIRoute.Comments}/${hotelID}`, {comment, rating});
+      store.dispatch(getComments(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);

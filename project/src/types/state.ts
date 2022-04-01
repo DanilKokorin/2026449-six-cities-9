@@ -18,4 +18,5 @@ export type AppState = {
   comments: Сomment[],
   nearby: Hotel[],
   isHotelLodaing: boolean,
+  rating: number,
 }
