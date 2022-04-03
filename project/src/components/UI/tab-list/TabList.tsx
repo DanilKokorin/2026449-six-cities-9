@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 import { mainСities } from '../../../const';
 import { useAppSelector } from '../../../hooks/useState';
 import { useAppDispatch } from './../../../hooks/useState';
-import { setCity } from './../../../store/action';
+import { setCity } from './../../../store/main-data/main-data';
 
 
 export default function TabList() {
-  const { city } = useAppSelector((state) => state);
+  const { city } = useAppSelector(({MAIN}) => MAIN);
   const dispatch = useAppDispatch();
 
   function getСity(getCity: string) {

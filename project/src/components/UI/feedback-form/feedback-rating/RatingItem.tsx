@@ -1,4 +1,4 @@
-import { setRating } from '../../../../store/action';
+import { setRating } from '../../../../store/offer-data/offer-data';
 import { useAppDispatch } from './../../../../hooks/useState';
 
 type RatingItemProps = {

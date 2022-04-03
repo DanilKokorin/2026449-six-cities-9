@@ -7,14 +7,15 @@ import CardHotel from './../components/UI/Сard/СardHotel';
 import Review from '../components/UI/Reviews/Review';
 import { useAppSelector } from '../hooks/useState';
 import { useAppDispatch } from './../hooks/useState';
-import { useEffect, useState } from 'react';
+import { Key, useEffect, useState } from 'react';
 import { fetchHotelAction, fetchCommentsAction, fetchNearbyAction } from './../store/api-action';
 import Loader from '../components/UI/Loader/Loader';
 import PageNotFound from './PageNotFound';
 
 
 export default function PropertyPage() {
-  const { hotel, comments, nearby, isHotelLodaing, authorizationStatus } = useAppSelector((state) => state);
+  const { authorizationStatus } = useAppSelector(({USER}) => USER);
+  const { hotel, comments, nearby, isHotelLodaing } = useAppSelector(({OFFER}) => OFFER);
   const isAuthorization = authorizationStatus === AuthorizationStatus.Auth;
   const [chosenHotel, setChosenHotel] = useState(nearby[0]);
   const param = useParams().id || '';
@@ -54,7 +55,7 @@ export default function PropertyPage() {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {hotel.images.map((img, index) => {
+              {hotel.images.map((img: Key | null | undefined, index: number) => {
                 if (index < 6) {
                   return (
                     <div key={img} className="property__image-wrapper">

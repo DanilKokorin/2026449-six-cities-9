@@ -1,7 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from '../store';
 import { store } from '../store';
-import { getHotel, getHotels, requireAuthorization, setError, getComments, getNearby } from './action';
+import { setError } from './error-process/error-process';
+import { getHotel, getComments, getNearby } from './offer-data/offer-data';
+import { getHotels } from './main-data/main-data';
+import { requireAuthorization } from './user-process/user-process';
 import { APIRoute, AuthorizationStatus } from '../const';
 import { Hotel } from '../types/hotel';
 import { saveToken, dropToken } from './../services/token';

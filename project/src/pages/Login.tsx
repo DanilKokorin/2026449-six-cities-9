@@ -5,7 +5,8 @@ import { useAppDispatch } from '../hooks/useState';
 import { loginAction } from '../store/api-action';
 import { AuthData } from '../types/AuthData';
 import Header from './../components/UI/header/Header';
-import { setCity, setUser } from './../store/action';
+import { setUser } from './../store/user-process/user-process';
+import { setCity } from './../store/main-data/main-data';
 
 export default function Login(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);

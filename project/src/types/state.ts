@@ -7,16 +7,26 @@ export type State = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;
 
-export type AppState = {
-  city: string,
-  hotels: Hotel[],
-  hotel: Hotel,
-  isLodaing: boolean,
-  authorizationStatus: AuthorizationStatus,
-  error: string,
-  user: string,
+export type OfferState = {
   comments: Сomment[],
   nearby: Hotel[],
+  hotel: Hotel,
   isHotelLodaing: boolean,
   rating: number,
-}
+};
+
+export type UserProcess = {
+  user: string,
+  authorizationStatus: AuthorizationStatus,
+};
+
+export type ErrorProcess = {
+  error: string,
+};
+
+export type MainState = {
+  city: string,
+  hotels: Hotel[],
+  isLodaing: boolean,
+};
+

@@ -9,7 +9,7 @@ type LeaveFeedbackProps = {
 }
 
 export default function LeaveFeedback({ hotelID }: LeaveFeedbackProps) {
-  const { rating } = useAppSelector((state) => state);
+  const { rating } = useAppSelector(({OFFER}) => OFFER);
   const [formFeedback, setFormFeedback] = useState('');
   const [error, setError] = useState(null);
   const dispatch = useAppDispatch();

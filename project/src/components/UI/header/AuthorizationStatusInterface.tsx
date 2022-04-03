@@ -5,10 +5,10 @@ import { useAppDispatch } from './../../../hooks/useState';
 import { logoutAction } from './../../../store/api-action';
 
 export default function AuthorizationStatusInterface() {
-  const email = useAppSelector((state) => state.user);
+  const email = useAppSelector(({USER}) => USER.user);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { authorizationStatus } = useAppSelector((state) => state);
+  const { authorizationStatus } = useAppSelector(({USER}) => USER);
   const isAuthorization = authorizationStatus === AuthorizationStatus.Auth;
 
   return (

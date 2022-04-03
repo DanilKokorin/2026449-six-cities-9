@@ -47,5 +47,12 @@ export enum HTTP_CODE {
   NOT_FOUND = 404,
 }
 
+export enum NameSpace {
+  main = 'MAIN',
+  offer = 'OFFER',
+  user = 'USER',
+  error = 'ERROR',
+}
+
 export const errorStatuses = [HTTP_CODE.BAD_REQUEST, HTTP_CODE.UNAUTHORIZED, HTTP_CODE.NOT_FOUND];
 
