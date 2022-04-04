@@ -1,14 +1,3 @@
-export const SET_CITY = 'SET_CITY';
-export const GET_HOTELS = 'GET_HOTELS';
-export const GET_HOTEL = 'GET_HOTEL';
-export const REQUIRE_AUTHORIZATION = 'REQUIRE_AUTHORIZATION';
-export const SET_ERROR = 'SET_ERROR';
-export const SET_USER = 'SET_USER';
-export const REDIRECT_TO_ROUTE = 'REDIRECT_TO_ROUTE';
-export const GET_COMMENTS = 'GET_COMMENTS';
-export const GET_NEARBY = 'GET_NEARBY';
-export const SET_RATING = 'SET_RATING';
-
 export const DEFAULT_CITY = 'Paris';
 
 export const mainСities = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
