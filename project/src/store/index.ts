@@ -6,7 +6,7 @@ import { redirect } from './middlewares/redirect';
 export const api = createAPI();
 
 export const store = configureStore({
-  rootReducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       thunk: {

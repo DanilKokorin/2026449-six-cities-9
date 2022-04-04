@@ -7,7 +7,7 @@ import CardHotel from './../components/UI/Сard/СardHotel';
 import Review from '../components/UI/Reviews/Review';
 import { useAppSelector } from '../hooks/useState';
 import { useAppDispatch } from './../hooks/useState';
-import { Key, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchHotelAction, fetchCommentsAction, fetchNearbyAction } from './../store/api-action';
 import Loader from '../components/UI/Loader/Loader';
 import PageNotFound from './PageNotFound';
@@ -55,7 +55,7 @@ export default function PropertyPage() {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {hotel.images.map((img: Key | null | undefined, index: number) => {
+              {hotel.images.map((img, index) => {
                 if (index < 6) {
                   return (
                     <div key={img} className="property__image-wrapper">
