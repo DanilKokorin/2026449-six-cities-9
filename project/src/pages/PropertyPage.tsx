@@ -14,7 +14,8 @@ import PageNotFound from './PageNotFound';
 
 
 export default function PropertyPage() {
-  const { hotel, comments, nearby, isHotelLodaing, authorizationStatus } = useAppSelector((state) => state);
+  const { authorizationStatus } = useAppSelector(({USER}) => USER);
+  const { hotel, comments, nearby, isHotelLodaing } = useAppSelector(({OFFER}) => OFFER);
   const isAuthorization = authorizationStatus === AuthorizationStatus.Auth;
   const [chosenHotel, setChosenHotel] = useState(nearby[0]);
   const param = useParams().id || '';

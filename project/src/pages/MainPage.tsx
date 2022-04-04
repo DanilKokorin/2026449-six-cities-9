@@ -6,7 +6,7 @@ import { Hotel } from '../types/hotel';
 import MainPageEmpty from './../components/UI/Main/MainPageEmpty';
 
 export default function MainPage() {
-  const { city, hotels } = useAppSelector((state) => state);
+  const { city, hotels } = useAppSelector(({MAIN}) => MAIN);
   const offers: Hotel[] = hotels.filter((hotel) => hotel.city.name === city);
 
   return (
