@@ -14,6 +14,8 @@ import { Сomment } from '../types/comment';
 import { TIMEOUT_SHOW_ERROR } from './../const';
 import { errorHandle } from './../services/error-handle';
 import { AddReview } from '../types/addReview';
+import { setEmpty, setFavorites } from './favorites-data/favorites-data';
+import { SendFavorite } from '../types/sendFavorite';
 
 export const clearErrorAction = createAsyncThunk(
   'main/clearError',
@@ -108,6 +110,8 @@ export const logoutAction = createAsyncThunk(
       await api.delete(APIRoute.Logout);
       dropToken();
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+      store.dispatch(setFavorites([]));
+      store.dispatch(fetchHotelsAction());
     } catch (error) {
       errorHandle(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
@@ -117,13 +121,41 @@ export const logoutAction = createAsyncThunk(
 
 export const LeaveFeedbackAction = createAsyncThunk(
   'offer/leaveFeedback',
-  async ({hotelID, reviewData}: AddReview) => {
+  async ({ hotelID, reviewData }: AddReview) => {
     try {
-      const {comment, rating} = reviewData;
-      const {data} = await api.post(`${APIRoute.Comments}/${hotelID}`, {comment, rating});
+      const { comment, rating } = reviewData;
+      const { data } = await api.post(`${APIRoute.Comments}/${hotelID}`, { comment, rating });
       store.dispatch(getComments(data));
     } catch (error) {
       errorHandle(error);
     }
   },
 );
+
+export const fetchFavoritesAction = createAsyncThunk(
+  'favorites/setFavorites',
+  async () => {
+    try {
+      const { data } = await api.get<Hotel[]>(`${APIRoute.Favorite}`);
+      !data.length ? store.dispatch(setEmpty(true)) : store.dispatch(setEmpty(false));
+      store.dispatch(setFavorites(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const sendFavoriteAction = createAsyncThunk(
+  'favorites/setFavorites',
+  async ({ id, status }: SendFavorite) => {
+    try {
+      const { data } = await api.post<Hotel[]>(`${APIRoute.Favorite}/${id}/${status}`);
+      store.dispatch(setFavorites(data));
+      store.dispatch(fetchFavoritesAction());
+      store.dispatch(fetchHotelsAction());
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+

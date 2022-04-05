@@ -24,6 +24,11 @@ export type ErrorProcess = {
   error: string,
 };
 
+export type FavoritesData = {
+  favorites: Hotel[],
+  emptryFavorites: boolean,
+};
+
 export type MainState = {
   city: string,
   hotels: Hotel[],

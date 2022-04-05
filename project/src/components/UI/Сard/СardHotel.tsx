@@ -1,4 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AppRoute, AuthorizationStatus } from '../../../const';
+import { useAppSelector } from '../../../hooks/useState';
+import { store } from '../../../store';
+import { sendFavoriteAction } from '../../../store/api-action';
 import { Hotel } from '../../../types/hotel';
 
 type СardHotelProps = {
@@ -7,6 +11,9 @@ type СardHotelProps = {
 };
 
 export default function СardHotel({ sortedHotel, setChosenHotel }: СardHotelProps) {
+  const status = sortedHotel.isFavorite ? '0' : '1';
+  const { authorizationStatus } = useAppSelector(({ USER }) => USER);
+  const navigate = useNavigate();
   function getRating(rating: number): number {
     return rating * 20;
   }
@@ -14,6 +21,15 @@ export default function СardHotel({ sortedHotel, setChosenHotel }: СardHotelPr
   const onMouseEnter = () => {
     setChosenHotel(sortedHotel);
   };
+
+  function setFavorites() {
+    const isAuthorization = authorizationStatus === AuthorizationStatus.Auth;
+    const id = sortedHotel.id;
+    if (!isAuthorization) {
+      return navigate(AppRoute.Login);
+    }
+    store.dispatch(sendFavoriteAction({ id, status }));
+  }
 
   return (
     <article onMouseEnter={onMouseEnter} className="cities__place-card place-card">
@@ -35,6 +51,7 @@ export default function СardHotel({ sortedHotel, setChosenHotel }: СardHotelPr
           <button
             className={`place-card__bookmark-button button${sortedHotel.isFavorite ? ' place-card__bookmark-button--active' : ''}`}
             type="button"
+            onClick={() => setFavorites()}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
