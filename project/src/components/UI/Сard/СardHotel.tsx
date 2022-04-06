@@ -1,19 +1,20 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../../const';
-import { useAppSelector } from '../../../hooks/useState';
-import { store } from '../../../store';
-import { sendFavoriteAction } from '../../../store/api-action';
+import { useAppDispatch, useAppSelector } from '../../../hooks/useState';
+import { fetchNearbyAction, sendFavoriteAction } from '../../../store/api-action';
 import { Hotel } from '../../../types/hotel';
 
 type СardHotelProps = {
   sortedHotel: Hotel;
   setChosenHotel: any;
+  paramId?: string;
 };
 
-export default function СardHotel({ sortedHotel, setChosenHotel }: СardHotelProps) {
+export default function СardHotel({ sortedHotel, setChosenHotel, paramId }: СardHotelProps) {
   const status = sortedHotel.isFavorite ? '0' : '1';
   const { authorizationStatus } = useAppSelector(({ USER }) => USER);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   function getRating(rating: number): number {
     return rating * 20;
   }
@@ -28,7 +29,8 @@ export default function СardHotel({ sortedHotel, setChosenHotel }: СardHotelPr
     if (!isAuthorization) {
       return navigate(AppRoute.Login);
     }
-    store.dispatch(sendFavoriteAction({ id, status }));
+    dispatch(sendFavoriteAction({ id, status }));
+    paramId && dispatch(fetchNearbyAction(paramId));
   }
 
   return (

@@ -8,9 +8,9 @@ type MainWithFavoritesProps = {
 };
 
 export default function MainWithFavorites({favorites}: MainWithFavoritesProps) {
-  const citieys: Array<string> = [];
-  favorites.map((favorite) => citieys.push(favorite.city.name));
-  const sortedCitieys: Array<string> = [...new Set(citieys)];
+  const cities: Array<string> = [];
+  favorites.map((favorite) => cities.push(favorite.city.name));
+  const sortedCitieys: Array<string> = [...new Set(cities)];
 
   return (
     <div className="page">
