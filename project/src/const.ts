@@ -1,3 +1,4 @@
+export const REDIRECT_TO_ROUTE = 'REDIRECT_TO_ROUTE';
 export const DEFAULT_CITY = 'Paris';
 
 export const mainСities = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
@@ -27,6 +28,7 @@ export enum APIRoute {
   Logout = '/logout',
   Nearby = '/nearby',
   Comments = '/comments',
+  Favorite = '/favorite',
 }
 
 
@@ -41,7 +43,7 @@ export enum NameSpace {
   offer = 'OFFER',
   user = 'USER',
   error = 'ERROR',
+  favorites = 'FAVORITES',
 }
 
 export const errorStatuses = [HTTP_CODE.BAD_REQUEST, HTTP_CODE.UNAUTHORIZED, HTTP_CODE.NOT_FOUND];
-

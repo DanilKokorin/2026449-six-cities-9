@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { fetchHotelAction, fetchCommentsAction, fetchNearbyAction } from './../store/api-action';
 import Loader from '../components/UI/Loader/Loader';
 import PageNotFound from './PageNotFound';
+import { getNearby } from '../store/offer-data/offer-data';
 
 
 export default function PropertyPage() {
@@ -28,6 +29,9 @@ export default function PropertyPage() {
     dispatch(fetchHotelAction(param));
     dispatch(fetchCommentsAction(param));
     dispatch(fetchNearbyAction(param));
+    return () => {
+      dispatch(getNearby([]));
+    };
   }, [dispatch, param]);
 
   useEffect(() => {
@@ -158,7 +162,7 @@ export default function PropertyPage() {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              {nearby.map((item) => <CardHotel setChosenHotel={setChosenHotel} sortedHotel={item} key={item.id} />)}
+              {nearby.map((item) => <CardHotel paramId={param} setChosenHotel={setChosenHotel} sortedHotel={item} key={item.id} />)}
             </div>
           </section>
         </div>

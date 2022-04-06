@@ -1,12 +1,20 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AppRoute, AuthorizationStatus } from '../../../const';
+import { useAppDispatch, useAppSelector } from '../../../hooks/useState';
+import { fetchNearbyAction, sendFavoriteAction } from '../../../store/api-action';
 import { Hotel } from '../../../types/hotel';
 
 type СardHotelProps = {
   sortedHotel: Hotel;
   setChosenHotel: any;
+  paramId?: string;
 };
 
-export default function СardHotel({ sortedHotel, setChosenHotel }: СardHotelProps) {
+export default function СardHotel({ sortedHotel, setChosenHotel, paramId }: СardHotelProps) {
+  const status = sortedHotel.isFavorite ? '0' : '1';
+  const { authorizationStatus } = useAppSelector(({ USER }) => USER);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   function getRating(rating: number): number {
     return rating * 20;
   }
@@ -14,6 +22,16 @@ export default function СardHotel({ sortedHotel, setChosenHotel }: СardHotelPr
   const onMouseEnter = () => {
     setChosenHotel(sortedHotel);
   };
+
+  function setFavorites() {
+    const isAuthorization = authorizationStatus === AuthorizationStatus.Auth;
+    const id = sortedHotel.id;
+    if (!isAuthorization) {
+      return navigate(AppRoute.Login);
+    }
+    dispatch(sendFavoriteAction({ id, status }));
+    paramId && dispatch(fetchNearbyAction(paramId));
+  }
 
   return (
     <article onMouseEnter={onMouseEnter} className="cities__place-card place-card">
@@ -35,6 +53,7 @@ export default function СardHotel({ sortedHotel, setChosenHotel }: СardHotelPr
           <button
             className={`place-card__bookmark-button button${sortedHotel.isFavorite ? ' place-card__bookmark-button--active' : ''}`}
             type="button"
+            onClick={() => setFavorites()}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
