@@ -15,8 +15,8 @@ import { getNearby } from '../store/offer-data/offer-data';
 
 
 export default function PropertyPage() {
-  const { authorizationStatus } = useAppSelector(({USER}) => USER);
-  const { hotel, comments, nearby, isHotelLodaing } = useAppSelector(({OFFER}) => OFFER);
+  const { authorizationStatus } = useAppSelector(({ USER }) => USER);
+  const { hotel, comments, nearby, isHotelLodaing } = useAppSelector(({ OFFER }) => OFFER);
   const isAuthorization = authorizationStatus === AuthorizationStatus.Auth;
   const [chosenHotel, setChosenHotel] = useState(nearby[0]);
   const param = useParams().id || '';
@@ -60,13 +60,15 @@ export default function PropertyPage() {
           <div className="property__gallery-container container">
             <div className="property__gallery">
               {hotel.images.map((img, index) => {
-                if (index < 6) {
-                  return (
-                    <div key={img} className="property__image-wrapper">
-                      <img className="property__image" src={img} alt="studio" />
-                    </div>
-                  );
+                if (index > 5) {
+                  return null;
                 }
+
+                return (
+                  <div key={img} className="property__image-wrapper">
+                    <img className="property__image" src={img} alt="studio" />
+                  </div>
+                );
               })}
             </div>
           </div>
