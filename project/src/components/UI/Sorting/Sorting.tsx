@@ -1,8 +1,8 @@
-import { sortedBy } from '../../../const';
+import { sortingOptions } from '../../../const';
 import { useState } from 'react';
 
 
-export default function Sorting({getTitle}: any) {
+export default function Sorting({getTitle}: {getTitle: (title: string) => void}) {
   const [isOpen, setOpen] = useState(false);
   const [isTitle, setTitle] = useState('Popular');
 
@@ -22,7 +22,7 @@ export default function Sorting({getTitle}: any) {
         </svg>
       </span>
       <ul className={isOpen ? 'places__options places__options--custom places__options--opened' : 'places__options places__options--custom'}>
-        {sortedBy.map((item) => <li key={item} onClick={() => getSotedTitles(item)} className={`places__option ${item === isTitle && 'places__option--active'}`} tabIndex={0}>{item}</li>)}
+        {sortingOptions.map((item) => <li key={item} onClick={() => getSotedTitles(item)} className={`places__option ${item === isTitle && 'places__option--active'}`} tabIndex={0}>{item}</li>)}
       </ul>
     </form>
   );

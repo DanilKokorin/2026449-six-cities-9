@@ -6,7 +6,7 @@ import { Hotel } from '../../../types/hotel';
 
 type СardHotelProps = {
   sortedHotel: Hotel;
-  setChosenHotel: any;
+  setChosenHotel: (hotel: Hotel) => void;
   paramId?: string;
 };
 
