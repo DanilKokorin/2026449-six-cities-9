@@ -1,5 +1,5 @@
 import { setRating } from '../../../../store/offer-data/offer-data';
-import { useAppDispatch } from './../../../../hooks/useState';
+import { useAppDispatch } from '../../../../hooks/useState';
 
 type RatingItemProps = {
   start: number;

@@ -1,19 +1,27 @@
 import { Route, Routes } from 'react-router-dom';
-import FavoritePage from '../../pages/FavoritePage';
-import Login from '../../pages/Login';
-import MainPage from '../../pages/MainPage';
-import PageNotFound from '../../pages/PageNotFound';
-import PropertyPage from '../../pages/PropertyPage';
+import FavoritePage from '../pages/favorite-page';
+import Login from '../pages/login';
+import MainPage from '../pages/main-page';
+import PageNotFound from '../pages/page-not-found';
+import PropertyPage from '../pages/property-page';
 import Layout from '../../route/layout';
 import PrivateRoute from '../../route/private-route';
 import { AppRoute } from '../../const';
-import Loader from './../UI/Loader/Loader';
+import Loader from '../ui/Loader/loader';
 import HistoryRouter from '../../route/history-route';
 import browserHistory from './../../browser-history';
 import { useAppLoading } from '../../hooks/useAppLoading';
+import { useAppSelector } from '../../hooks/useState';
 
 export default function App() {
   const isAppLoading = useAppLoading();
+  const { errorServer } = useAppSelector(({ERROR}) => ERROR);
+  if (errorServer) {
+    return (
+      <h1>Server error, please check back later</h1>
+    );
+  }
+
   if (isAppLoading) {
     return (
       <Loader />

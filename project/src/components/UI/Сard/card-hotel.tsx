@@ -6,7 +6,7 @@ import { Hotel } from '../../../types/hotel';
 
 type СardHotelProps = {
   sortedHotel: Hotel;
-  setChosenHotel: (hotel: Hotel) => void;
+  setChosenHotel: (hotel: Hotel | '') => void;
   paramId?: string;
 };
 
@@ -23,6 +23,10 @@ export default function СardHotel({ sortedHotel, setChosenHotel, paramId }: Сa
     setChosenHotel(sortedHotel);
   };
 
+  const onMouseLeave = () => {
+    setChosenHotel('');
+  };
+
   function setFavorites() {
     const isAuthorization = authorizationStatus === AuthorizationStatus.Auth;
     const id = sortedHotel.id;
@@ -34,7 +38,7 @@ export default function СardHotel({ sortedHotel, setChosenHotel, paramId }: Сa
   }
 
   return (
-    <article onMouseEnter={onMouseEnter} className="cities__place-card place-card">
+    <article onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className="cities__place-card place-card">
       {sortedHotel.isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
@@ -70,7 +74,7 @@ export default function СardHotel({ sortedHotel, setChosenHotel, paramId }: Сa
         <h2 className="place-card__name">
           <Link to={`/offer/${sortedHotel.id}`} >{sortedHotel.title}</Link>
         </h2>
-        <p className="place-card__type">{sortedHotel.type}</p>
+        <p className="place-card__type" style={{textTransform: 'capitalize'}}>{sortedHotel.type}</p>
       </div>
     </article>
   );

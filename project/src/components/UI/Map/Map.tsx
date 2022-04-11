@@ -3,14 +3,14 @@ import useMap from '../../../hooks/useMap';
 import { Hotel } from '../../../types/hotel';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../../marker';
 import { City } from '../../../types/typeMap';
+import { UrlMarker } from '../../../const';
 
 type MapProps = {
   hotels: Hotel[];
   city: City;
   className: string;
-  selectedPoint: Hotel;
+  selectedPoint: Hotel | '';
 };
 
 export default function Map({ hotels, city, className, selectedPoint }: MapProps) {
@@ -18,13 +18,13 @@ export default function Map({ hotels, city, className, selectedPoint }: MapProps
   const map = useMap(mapRef, city);
 
   const defaultCustomIcon = leaflet.icon({
-    iconUrl: URL_MARKER_DEFAULT,
+    iconUrl: UrlMarker.default,
     iconSize: [40, 40],
     iconAnchor: [20, 40],
   });
 
   const currentCustomIcon = leaflet.icon({
-    iconUrl: URL_MARKER_CURRENT,
+    iconUrl: UrlMarker.current,
     iconSize: [40, 40],
     iconAnchor: [20, 40],
   });
@@ -34,14 +34,21 @@ export default function Map({ hotels, city, className, selectedPoint }: MapProps
 
     if (map) {
       hotels.forEach((hotel) => {
+        let icon;
+        if (selectedPoint === '') {
+          icon = defaultCustomIcon;
+        } else {
+          icon = selectedPoint.id !== undefined && hotel.id === selectedPoint.id
+            ? currentCustomIcon
+            : defaultCustomIcon;
+        }
+
         leaflet
           .marker({
             lat: hotel.location.latitude,
             lng: hotel.location.longitude,
           }, {
-            icon: selectedPoint.id !== undefined && hotel.id === selectedPoint.id
-              ? currentCustomIcon
-              : defaultCustomIcon,
+            icon,
           })
           .addTo(map);
       });
@@ -52,6 +59,6 @@ export default function Map({ hotels, city, className, selectedPoint }: MapProps
     return () => {
       markers.clearLayers();
     };
-  }, [city.latitude, city.longitude, city.zoom, currentCustomIcon, defaultCustomIcon, hotels, map, selectedPoint.id]);
+  }, [city.latitude, city.longitude, city.zoom, currentCustomIcon, defaultCustomIcon, hotels, map, selectedPoint]);
   return <section className={className} ref={mapRef}></section>;
 }

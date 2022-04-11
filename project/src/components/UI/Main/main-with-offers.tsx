@@ -1,8 +1,8 @@
 import { Hotel } from '../../../types/hotel';
 import { City } from '../../../types/typeMap';
-import Map from '../Map/Map';
-import Sorting from '../Sorting/Sorting';
-import CardHotel from '../Сard/СardHotel';
+import Map from '../map/map';
+import Sorting from '../sorting/sorting';
+import CardHotel from '../Сard/card-hotel';
 import { useState, useEffect } from 'react';
 
 type MainWithOffersProps = {
@@ -14,7 +14,7 @@ export default function MainWithOffers({ hotels, city }: MainWithOffersProps) {
   const offer = hotels.filter((hotel) => hotel.city.name === city)[0];
   const location: City = offer.city.location;
   const [sortedHotels, setSortedHotels] = useState(hotels);
-  const [chosenHotel, setChosenHotel] = useState(hotels[0]);
+  const [chosenHotel, setChosenHotel] = useState<Hotel | ''>('');
 
   useEffect(() => {
     setSortedHotels(hotels);

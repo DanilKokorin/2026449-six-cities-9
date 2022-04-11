@@ -1,4 +1,4 @@
-import CardFavoritesHotel from './CardFavoritesHotel';
+import CardFavoritesHotel from './card-favorites-hotel';
 import { Hotel } from '../../../types/hotel';
 import { Link } from 'react-router-dom';
 import { setCity } from '../../../store/main-data/main-data';

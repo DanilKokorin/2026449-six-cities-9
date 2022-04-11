@@ -1,4 +1,4 @@
-import LeaveFeedbackRating from './feedback-rating/LeaveFeedbackRating';
+import LeaveFeedbackRating from './feedback-rating/leave-feedback-rating';
 import { FormEvent, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useState';
 import { AddReview } from '../../../types/addReview';
@@ -16,13 +16,15 @@ export default function LeaveFeedback({ hotelID }: LeaveFeedbackProps) {
 
   function setReview(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    addReview({
-      hotelID,
-      reviewData: {
-        rating: rating,
-        comment: formFeedback,
-      },
-    });
+    if(rating && formFeedback.trim().length > 0) {
+      addReview({
+        hotelID,
+        reviewData: {
+          rating: rating,
+          comment: formFeedback,
+        },
+      });
+    }
   }
 
   function addReview(review: AddReview) {
@@ -47,7 +49,9 @@ export default function LeaveFeedback({ hotelID }: LeaveFeedbackProps) {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        maxLength={50}
+        minLength={50}
+        maxLength={300}
+        required
       >
       </textarea>
       <div className="reviews__button-wrapper">
@@ -57,7 +61,7 @@ export default function LeaveFeedback({ hotelID }: LeaveFeedbackProps) {
         </p>
         <button
           className="reviews__submit form__submit button"
-          type="submit" disabled={rating === 0 || !formFeedback}
+          type="submit" disabled={rating === 0 || !(formFeedback.trim().length >= 50)}
         >
           Submit
         </button>

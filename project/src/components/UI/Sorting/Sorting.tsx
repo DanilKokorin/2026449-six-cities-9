@@ -1,4 +1,4 @@
-import { sortingOptions } from '../../../const';
+import { SORTING_OPTIONS } from '../../../const';
 import { useState } from 'react';
 
 
@@ -22,7 +22,7 @@ export default function Sorting({getTitle}: {getTitle: (title: string) => void})
         </svg>
       </span>
       <ul className={isOpen ? 'places__options places__options--custom places__options--opened' : 'places__options places__options--custom'}>
-        {sortingOptions.map((item) => <li key={item} onClick={() => getSotedTitles(item)} className={`places__option ${item === isTitle && 'places__option--active'}`} tabIndex={0}>{item}</li>)}
+        {SORTING_OPTIONS.map((item) => <li key={item} onClick={() => getSotedTitles(item)} className={`places__option ${item === isTitle && 'places__option--active'}`} tabIndex={0}>{item}</li>)}
       </ul>
     </form>
   );

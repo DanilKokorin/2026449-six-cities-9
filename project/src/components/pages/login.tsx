@@ -1,17 +1,18 @@
-import { useRef, FormEvent } from 'react';
+import { useRef, FormEvent, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AppRoute, mainСities } from '../const';
-import { useAppDispatch } from '../hooks/useState';
-import { loginAction } from '../store/api-action';
-import { AuthData } from '../types/AuthData';
-import Header from './../components/UI/header/Header';
-import { setUser } from './../store/user-process/user-process';
-import { setCity } from './../store/main-data/main-data';
+import { AppRoute, AuthorizationStatus, EMAIL_PATTERN, MAIN_CITIES } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks/useState';
+import { loginAction } from '../../store/api-action';
+import { AuthData } from '../../types/AuthData';
+import Header from '../ui/header/header';
+import { setUser } from '../../store/user-process/user-process';
+import { setCity } from '../../store/main-data/main-data';
+import { setError } from '../../store/error-process/error-process';
 
 export default function Login(): JSX.Element {
+  const { authorizationStatus } = useAppSelector(({USER}) => USER);
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -21,8 +22,15 @@ export default function Login(): JSX.Element {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+    evt.stopPropagation();
+
+    if(!loginRef?.current?.value.match(EMAIL_PATTERN)) {
+      dispatch(setError('Email is not a valid email'));
+      return false;
+    }
 
     if (loginRef.current !== null && passwordRef.current !== null) {
+      dispatch(setError(''));
       onSubmit({
         login: loginRef.current.value,
         password: passwordRef.current.value,
@@ -31,6 +39,24 @@ export default function Login(): JSX.Element {
       navigate(AppRoute.MainPage);
     }
   };
+
+  function getRandomCity() {
+    let randomNumber = 0;
+    randomNumber = Math.floor(Math.random() * 10);
+    if (randomNumber > 6) {
+      randomNumber -= 4;
+    }
+    return randomNumber;
+  }
+
+  const randomCity = getRandomCity();
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      navigate(AppRoute.MainPage);
+    }
+  }, [authorizationStatus, navigate]);
+
   return (
     <div className="page  page--gray page--login">
       <Header />
@@ -59,6 +85,8 @@ export default function Login(): JSX.Element {
                   type="password"
                   name="password"
                   id="password"
+                  minLength={2}
+                  pattern="(?=.*\d)(.*[0-9]{1,})(.*[A-z]{1,})"
                   placeholder="Password"
                   required
                 />
@@ -71,9 +99,9 @@ export default function Login(): JSX.Element {
               <Link
                 to='/'
                 className="locations__item-link"
-                onClick={() => dispatch(setCity(mainСities[3]))}
+                onClick={() => dispatch(setCity(MAIN_CITIES[randomCity]))}
               >
-                <span>Amsterdam</span>
+                <span>{MAIN_CITIES[randomCity]}</span>
               </Link>
             </div>
           </section>
@@ -82,3 +110,4 @@ export default function Login(): JSX.Element {
     </div>
   );
 }
+

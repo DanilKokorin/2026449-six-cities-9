@@ -1,5 +1,5 @@
 import { AuthorizationStatus } from '../const';
-import { store } from '../store/index';
+import { store } from '../store/store';
 import { Hotel } from './hotel';
 import { Сomment } from './comment';
 
@@ -22,6 +22,7 @@ export type UserProcess = {
 
 export type ErrorProcess = {
   error: string,
+  errorServer: boolean,
 };
 
 export type FavoritesData = {
@@ -33,5 +34,6 @@ export type MainState = {
   city: string,
   hotels: Hotel[],
   isLodaing: boolean,
+  emptryHotel: boolean,
 };
 

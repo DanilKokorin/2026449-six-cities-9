@@ -1,8 +1,8 @@
 import { AppRoute, AuthorizationStatus } from '../../../const';
 import { useAppSelector } from '../../../hooks/useState';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAppDispatch } from './../../../hooks/useState';
-import { logoutAction } from './../../../store/api-action';
+import { useAppDispatch } from '../../../hooks/useState';
+import { logoutAction } from '../../../store/api-action';
 
 export default function AuthorizationStatusInterface() {
   const email = useAppSelector(({USER}) => USER.user);

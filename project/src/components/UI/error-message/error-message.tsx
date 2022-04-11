@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../../hooks/useState';
-import cl from './ErrorMessage.module.css';
+import cl from './error-message.module.css';
 
 export default function ErrorMessage(): JSX.Element | null {
   const { error } = useAppSelector(({ERROR}) => ERROR);

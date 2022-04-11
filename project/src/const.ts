@@ -1,9 +1,11 @@
 export const REDIRECT_TO_ROUTE = 'REDIRECT_TO_ROUTE';
 export const DEFAULT_CITY = 'Paris';
 
-export const mainСities = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+export const MAIN_CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
-export const sortingOptions = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
+export const SORTING_OPTIONS = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
+
+export const EMAIL_PATTERN = new RegExp(/^((([0-9A-Za-z]{1}[A-Za-z0-9_\-.]{1,}[0-9A-Za-z]{1}))@([-A-Za-z0-9]{1,}\.){1,2}[-A-Za-z]{2,})$/u);
 
 export const TIMEOUT_SHOW_ERROR = 3000;
 
@@ -15,6 +17,7 @@ export enum AppRoute {
   Favorites = '/favorites',
   Room = '/offer/:id',
 }
+
 
 export enum AuthorizationStatus {
   Auth = 'AUTH',
@@ -46,4 +49,15 @@ export enum NameSpace {
   favorites = 'FAVORITES',
 }
 
-export const errorStatuses = [HTTP_CODE.BAD_REQUEST, HTTP_CODE.UNAUTHORIZED, HTTP_CODE.NOT_FOUND];
+export enum UrlMarker {
+  default = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
+  current = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg',
+}
+
+export const ERROR_STATUSES = [HTTP_CODE.BAD_REQUEST, HTTP_CODE.UNAUTHORIZED, HTTP_CODE.NOT_FOUND];
+
+export const URL_MARKER_DEFAULT =
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
+
+export const URL_MARKER_CURRENT =
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';

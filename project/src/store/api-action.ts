@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { api } from '../store';
-import { store } from '../store';
-import { setError } from './error-process/error-process';
+import { api } from './store';
+import { store } from './store';
+import { setError, setErrorServer } from './error-process/error-process';
 import { getHotel, getComments, getNearby } from './offer-data/offer-data';
-import { getHotels } from './main-data/main-data';
+import { getHotels, setEmptryHotel } from './main-data/main-data';
 import { requireAuthorization } from './user-process/user-process';
 import { APIRoute, AuthorizationStatus } from '../const';
 import { Hotel } from '../types/hotel';
@@ -36,6 +36,7 @@ export const fetchHotelsAction = createAsyncThunk(
       store.dispatch(getHotels(data));
     } catch (error) {
       errorHandle(error);
+      store.dispatch(setErrorServer(true));
     }
   },
 );
@@ -45,8 +46,10 @@ export const fetchHotelAction = createAsyncThunk(
   async (id: string | undefined) => {
     try {
       const { data } = await api.get<Hotel>(`${APIRoute.Hotels}/${id}`);
+      !data ? store.dispatch(setEmptryHotel(true)) : store.dispatch(setEmptryHotel(false));
       store.dispatch(getHotel(data));
     } catch (error) {
+      store.dispatch(getHotel(''));
       errorHandle(error);
     }
   },
@@ -60,6 +63,7 @@ export const fetchCommentsAction = createAsyncThunk(
       store.dispatch(getComments(data));
     } catch (error) {
       errorHandle(error);
+      store.dispatch(setErrorServer(true));
     }
   },
 );
@@ -72,6 +76,7 @@ export const fetchNearbyAction = createAsyncThunk(
       store.dispatch(getNearby(data));
     } catch (error) {
       errorHandle(error);
+      store.dispatch(setErrorServer(true));
     }
   },
 );
@@ -158,4 +163,5 @@ export const sendFavoriteAction = createAsyncThunk(
     }
   },
 );
+
 
