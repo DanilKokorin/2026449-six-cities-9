@@ -1,4 +1,4 @@
-import cl from './Loader.module.css';
+import cl from './loader.module.css';
 
 export default function Loader() {
   return (

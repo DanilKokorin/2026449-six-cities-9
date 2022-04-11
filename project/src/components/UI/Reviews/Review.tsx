@@ -10,8 +10,8 @@ export default function Review({ review }: ReviewProps) {
   }
 
   function getMonthDate(date: string): string {
-    const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    return month[new Date(date).getMonth()];
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return months[new Date(date).getMonth()];
   }
 
   function getFullYearDate(date: string): number {

@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { mainСities } from '../../../const';
+import { MAIN_CITIES } from '../../../const';
 import { useAppSelector } from '../../../hooks/useState';
-import { useAppDispatch } from './../../../hooks/useState';
-import { setCity } from './../../../store/main-data/main-data';
+import { useAppDispatch } from '../../../hooks/useState';
+import { setCity } from '../../../store/main-data/main-data';
 
 
 export default function TabList() {
@@ -17,7 +17,7 @@ export default function TabList() {
 
   return (
     <ul className="locations__list tabs__list">
-      {mainСities.map((location) => {
+      {MAIN_CITIES.map((location) => {
         const isActive = `locations__item-link tabs__item ${location === city && ' tabs__item--active'}`;
         return (
           <li className="locations__item" key={location}>

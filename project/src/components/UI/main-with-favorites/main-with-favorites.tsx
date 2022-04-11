@@ -1,6 +1,6 @@
-import CardFavorites from '../Сard/CardFavorites';
-import Footer from '../footer/Footer';
-import Header from '../header/Header';
+import CardFavorites from '../Сard/card-favorites';
+import Footer from '../footer/footer';
+import Header from '../header/header';
 import { Hotel } from '../../../types/hotel';
 
 type MainWithFavoritesProps = {

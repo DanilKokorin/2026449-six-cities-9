@@ -1,8 +1,8 @@
-import Footer from '../components/UI/footer/Footer';
-import Header from '../components/UI/header/Header';
-import { useAppSelector } from '../hooks/useState';
-import Loader from '../components/UI/Loader/Loader';
-import MainWithFavorites from '../components/UI/main-favorites/MainWithFavorites';
+import Footer from '../ui/footer/footer';
+import Header from '../ui/header/header';
+import { useAppSelector } from '../../hooks/useState';
+import Loader from '../ui/Loader/loader';
+import MainWithFavorites from '../ui/main-with-favorites/main-with-favorites';
 
 export default function FavoritePage() {
   const { favorites, emptryFavorites } = useAppSelector(({ FAVORITES }) => FAVORITES);

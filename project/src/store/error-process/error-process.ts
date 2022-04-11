@@ -4,6 +4,7 @@ import { ErrorProcess } from '../../types/state';
 
 const initialState: ErrorProcess = {
   error: '',
+  errorServer: false,
 };
 
 export const errorProcess = createSlice({
@@ -13,7 +14,10 @@ export const errorProcess = createSlice({
     setError: (state, action) => {
       state.error = action.payload;
     },
+    setErrorServer: (state, action) => {
+      state.errorServer = action.payload;
+    },
   },
 });
 
-export const { setError } = errorProcess.actions;
+export const { setError, setErrorServer } = errorProcess.actions;

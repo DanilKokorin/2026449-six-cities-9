@@ -6,6 +6,7 @@ const initialState: MainState = {
   hotels: [],
   city: DEFAULT_CITY,
   isLodaing: true,
+  emptryHotel: true,
 };
 
 export const mainData = createSlice({
@@ -19,7 +20,11 @@ export const mainData = createSlice({
     setCity: (state, action) => {
       state.city = action.payload;
     },
+    setEmptryHotel: (state, action) => {
+      state.emptryHotel = action.payload;
+      state.isLodaing = false;
+    },
   },
 });
 
-export const { getHotels, setCity } = mainData.actions;
+export const { getHotels, setCity, setEmptryHotel } = mainData.actions;

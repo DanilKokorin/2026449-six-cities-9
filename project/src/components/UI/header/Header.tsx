@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import AuthorizationStatusInterface from './AuthorizationStatusInterface';
+import AuthorizationStatusInterface from './authorization-status-interface';
 
 export default function Header() {
   return (

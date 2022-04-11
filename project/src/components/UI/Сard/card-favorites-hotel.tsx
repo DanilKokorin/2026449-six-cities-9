@@ -2,7 +2,7 @@ import { Hotel } from '../../../types/hotel';
 import { Link, useNavigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../../const';
 import { sendFavoriteAction } from '../../../store/api-action';
-import { store } from '../../../store';
+import { store } from '../../../store/store';
 import { useAppSelector } from '../../../hooks/useState';
 
 export default function CardFavoritesHotel({ item }: { item: Hotel; }) {

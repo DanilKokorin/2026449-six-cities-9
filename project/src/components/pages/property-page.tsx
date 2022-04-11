@@ -1,29 +1,47 @@
-import { AuthorizationStatus } from '../const';
-import Header from '../components/UI/header/Header';
-import LeaveFeedback from '../components/UI/feedback-form/LeaveFeedback';
-import { useParams } from 'react-router-dom';
-import Map from '../components/UI/Map/Map';
-import CardHotel from './../components/UI/Сard/СardHotel';
-import Review from '../components/UI/Reviews/Review';
-import { useAppSelector } from '../hooks/useState';
-import { useAppDispatch } from './../hooks/useState';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import Header from '../ui/header/header';
+import LeaveFeedback from '../ui/feedback-form/leave-feedback';
+import { useNavigate, useParams } from 'react-router-dom';
+import Map from '../ui/map/map';
+import CardHotel from '../ui/Сard/card-hotel';
+import Review from '../ui/reviews/review';
+import { useAppSelector } from '../../hooks/useState';
+import { useAppDispatch } from '../../hooks/useState';
 import { useEffect, useState } from 'react';
-import { fetchHotelAction, fetchCommentsAction, fetchNearbyAction } from './../store/api-action';
-import Loader from '../components/UI/Loader/Loader';
-import PageNotFound from './PageNotFound';
-import { getNearby } from '../store/offer-data/offer-data';
+import { fetchHotelAction, fetchCommentsAction, fetchNearbyAction, sendFavoriteAction } from '../../store/api-action';
+import Loader from '../ui/Loader/loader';
+import PageNotFound from './page-not-found';
+import { getNearby } from '../../store/offer-data/offer-data';
+import { Hotel } from '../../types/hotel';
 
 
 export default function PropertyPage() {
   const { authorizationStatus } = useAppSelector(({ USER }) => USER);
   const { hotel, comments, nearby, isHotelLodaing } = useAppSelector(({ OFFER }) => OFFER);
+  const { emptryHotel } = useAppSelector(({ MAIN }) => MAIN);
   const isAuthorization = authorizationStatus === AuthorizationStatus.Auth;
-  const [chosenHotel, setChosenHotel] = useState(nearby[0]);
+  const [chosenHotel, setChosenHotel] = useState<Hotel | ''>('');
   const param = useParams().id || '';
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   function getRating(rating: number): number {
     return rating * 20;
   }
+
+  function setFavorites() {
+    const status = hotel.isFavorite ? '0' : '1';
+    const id = hotel.id;
+    if (!isAuthorization) {
+      return navigate(AppRoute.Login);
+    }
+    dispatch(sendFavoriteAction({ id, status }));
+    dispatch(fetchHotelAction(param));
+  }
+  if (comments.length) {
+  // eslint-disable-next-line no-console
+    console.log([...comments].reverse());
+  }
+
 
   useEffect(() => {
     dispatch(fetchHotelAction(param));
@@ -32,24 +50,25 @@ export default function PropertyPage() {
     return () => {
       dispatch(getNearby([]));
     };
-  }, [dispatch, param]);
+  }, [param]);
 
-  useEffect(() => {
-    setChosenHotel(nearby[0]);
-  }, [nearby]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [param]);
 
+
+  if (emptryHotel && !isHotelLodaing) {
+    return (
+      <PageNotFound />
+    );
+  }
+
+
   if (isHotelLodaing) {
     return (
       <Loader />
     );
-  }
-
-  if (!hotel) {
-    return <PageNotFound />;
   }
 
   return (
@@ -86,8 +105,12 @@ export default function PropertyPage() {
                 <h1 className="property__name">
                   {hotel.title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
-                  <svg className="property__bookmark-icon" width="31" height="33">
+                <button
+                  className={`property__bookmark-button button ${hotel.isFavorite ? ' place-card__bookmark-button--active ' : ''}`}
+                  onClick={() => setFavorites()}
+                  type="button"
+                >
+                  <svg className="place-card__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>
@@ -148,15 +171,21 @@ export default function PropertyPage() {
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
                 <ul className="reviews__list">
-                  {comments.map((comment) => (
-                    <Review review={comment} key={comment.id} />
-                  ))}
+                  {[...comments].reverse().map((comment, index) => {
+                    if (index > 9) {
+                      return null;
+                    }
+
+                    return (
+                      <Review review={comment} key={comment.id} />
+                    );
+                  })}
                 </ul>
                 {isAuthorization && <LeaveFeedback hotelID={Number(param)} />}
               </section>
             </div>
           </div>
-          {chosenHotel
+          {nearby.length
             ? <Map selectedPoint={chosenHotel} city={hotel.city.location} hotels={nearby} className="property__map map" />
             : <section className="property__map map"></section>}
         </section>

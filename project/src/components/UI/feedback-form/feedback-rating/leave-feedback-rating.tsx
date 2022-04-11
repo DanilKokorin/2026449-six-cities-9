@@ -1,5 +1,5 @@
 import { STARS_NUMBER } from '../../../../const';
-import RatingItem from './RatingItem';
+import RatingItem from './rating-item';
 
 export default function LeaveFeedbackRating() {
   const starts = Array(STARS_NUMBER).fill(null).map((item, index) => index + 1);
