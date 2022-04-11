@@ -4,7 +4,7 @@ import App from './components/app/app';
 import { store } from './store/store';
 import { Provider } from 'react-redux';
 import { fetchHotelsAction, checkAuthAction, fetchFavoritesAction } from './store/api-action';
-import ErrorMessage from './components/ui/error-message/error-message';
+import ErrorMessage from './components/elements/error-message/error-message';
 
 store.dispatch(fetchHotelsAction());
 store.dispatch(checkAuthAction());

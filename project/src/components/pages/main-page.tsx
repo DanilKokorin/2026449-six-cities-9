@@ -1,9 +1,9 @@
-import Header from '../ui/header/header';
-import MainWithOffers from '../ui/Main/main-with-offers';
-import TabList from '../ui/tab-list/tab-list';
+import Header from '../elements/header/header';
+import MainWithOffers from '../elements/Main/main-with-offers';
+import TabList from '../elements/tab-list/tab-list';
 import { useAppSelector } from '../../hooks/useState';
 import { Hotel } from '../../types/hotel';
-import MainPageEmpty from '../ui/Main/main-page-empty';
+import MainPageEmpty from '../elements/Main/main-page-empty';
 
 export default function MainPage() {
   const { city, hotels } = useAppSelector(({MAIN}) => MAIN);

@@ -4,7 +4,7 @@ import { AppRoute, AuthorizationStatus, EMAIL_PATTERN, MAIN_CITIES } from '../..
 import { useAppDispatch, useAppSelector } from '../../hooks/useState';
 import { loginAction } from '../../store/api-action';
 import { AuthData } from '../../types/AuthData';
-import Header from '../ui/header/header';
+import Header from '../elements/header/header';
 import { setUser } from '../../store/user-process/user-process';
 import { setCity } from '../../store/main-data/main-data';
 import { setError } from '../../store/error-process/error-process';

@@ -7,7 +7,7 @@ import PropertyPage from '../pages/property-page';
 import Layout from '../../route/layout';
 import PrivateRoute from '../../route/private-route';
 import { AppRoute } from '../../const';
-import Loader from '../ui/Loader/loader';
+import Loader from '../elements/Loader/loader';
 import HistoryRouter from '../../route/history-route';
 import browserHistory from './../../browser-history';
 import { useAppLoading } from '../../hooks/useAppLoading';
